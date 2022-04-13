@@ -1,13 +1,4 @@
-# #if the file is in the same directory
 from collections import Counter
-from isort import file
-
-
-def sayHello():
-    print("wow")
-
-
-# sayHello()
 
 # with statement closes file when block of code is finished
 with open("test.txt", "rt") as f:
@@ -38,7 +29,7 @@ print("==========================================")
 
 # 4 Iterate dictionary to format the output for the file we will make
 dictOfWordOccur = Counter(wordFile.split())
-formattedFileOutput = ""
+formattedFileOutput = f"Total Words: {wordsTotal} \n \n"
 
 for word in dictOfWordOccur:
     formattedFileOutput = formattedFileOutput + f"{word}: {dictOfWordOccur[word]} \n"
@@ -46,5 +37,6 @@ for word in dictOfWordOccur:
 print(formattedFileOutput)
 
 # 5 Write the Content to file
-with open("words", "w") as file:
+with open(".words", "w") as file:
     file.write(formattedFileOutput)
+
