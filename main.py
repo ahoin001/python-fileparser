@@ -1,42 +1,26 @@
 from collections import Counter
 
-# with statement closes file when block of code is finished
-with open("test.txt", "rt") as f:
-    wordFile = f.read()
+try:
+    with open("test.txt", "rt") as f:
+        wordFile = f.read()
+        formattedFileOutput = f"Total Words: {len(wordFile.split())} \n \n"
+        # Count the occurences of each word into dictionary
+        dictOfWordOccur = Counter(wordFile.split())
 
-# 1 Count Number of words in file
+        # Print line for each word and their occurences
+        for word in dictOfWordOccur:
+            formattedFileOutput = (
+                formattedFileOutput + f"{word}: {dictOfWordOccur[word]} \n"
+            )
 
-wordsTotal = len(wordFile.split())
+        try:
+            # Write the completed output to a new file .words, overwrite if it exsists
+            with open(".words", "w") as file:
+                file.write(formattedFileOutput)
+        except IOError:
+            print(f"Problem writing to output file")
 
-print("==========================================")
-print(f"There are {wordsTotal} words in this file")
+        print(formattedFileOutput)
 
-# 2 List all words in the file
-print("==========================================")
-print(f"All words in file: {wordFile.split()}")
-
-
-# 3 Count how many times each word appears in list Using Counter, returns dictionary for how many times each item occured
-print("==========================================")
-print(
-    f"Using Counter, occurence of each item in list returned as dictionary: {Counter(wordFile.split())}"
-)
-
-appleRepeat = Counter(wordFile.split())["apple"]
-print(f"The word apple occured {appleRepeat} times")
-
-print("==========================================")
-
-# 4 Iterate dictionary to format the output for the file we will make
-dictOfWordOccur = Counter(wordFile.split())
-formattedFileOutput = f"Total Words: {wordsTotal} \n \n"
-
-for word in dictOfWordOccur:
-    formattedFileOutput = formattedFileOutput + f"{word}: {dictOfWordOccur[word]} \n"
-
-print(formattedFileOutput)
-
-# 5 Write the Content to file
-with open(".words", "w") as file:
-    file.write(formattedFileOutput)
-
+except IOError:
+    print(f"Problem opening file")
