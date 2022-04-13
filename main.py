@@ -1,7 +1,15 @@
 from collections import Counter
 
+# Used to take arguments from command line
+import sys
+
+script_being_run = sys.argv[0]
+
 try:
-    with open("test.txt", "rt") as f:
+
+    user_file = sys.argv[1]
+
+    with open(user_file, "rt") as f:
         wordFile = f.read()
         formattedFileOutput = f"Total Words: {len(wordFile.split())} \n \n"
         # Count the occurences of each word into dictionary
